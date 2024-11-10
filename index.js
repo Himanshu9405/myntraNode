@@ -1,23 +1,31 @@
-const express = require('express');
-const mongoose = require('mongoose');
+import express from 'express'
+import connectDB from './config/db.js';
+import dotenv from 'dotenv'
+import cors from 'cors'
+import morgan from 'morgan'
+import authRoutes from "./routes/authRoutes.js"
+
+// rest object
 const app = express();
 const PORT = 3000;
-const userSchema = new mongoose.Schema({
-    "name": String,
-    "address": String
+
+//dotenv config
+dotenv.config();
+
+//database config
+connectDB();
+
+// middlewares
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
+
+// routes
+app.get("/", (req, res) => {
+    res.send("<h1>welcome</h1>");
 });
 
-const userModel = mongoose.model('user', userSchema)
-mongoose.connect('mongodb://127.0.0.1:27017/myntra').then(()=> {
-    console.log("db connected")
-});
-
-
-app.get("/", async(req, resp)=> {
-    const user = await userModel.find()
-    console.log("called", user );
-    resp.send("Hello World")
-})
+app.use('/api/v1/auth',authRoutes)
 
 app.listen(PORT, ()=> {
     console.log(`Server stared on ${PORT}`)
