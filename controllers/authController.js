@@ -2,6 +2,8 @@ import userModels from "../models/userModels.js";
 import VerificationToken from "../models/verificationToken.js";
 import { generateOTP,sendMail,generateEmailTemplate } from "../utils/mail.js";
 import { catchError, createRandomBytes, sendError } from "../utils/helper.js";
+import jwt from "jsonwebtoken"
+
 
 const registerController = async (req, res) => {
   try {
@@ -84,11 +86,18 @@ const verifyOTPController = async (req, res) => {
   
       // Delete the used OTP
       await VerificationToken.findByIdAndDelete(verificationToken._id);
+
+      const token = jwt.sign(
+        { id: user._id, email: user.email },
+        process.env.JWT_SECRET,  
+        { expiresIn: '1h' }  
+      );
   
       res.status(200).send({
         success: true,
         message: "Logged in successfully!",
         user,
+        token
       });
     } catch (error) {
       console.error(error);
