@@ -58,10 +58,6 @@ export const sendMail = async (name, email, subject, html) => {
           user: process.env.EMAIL,
           pass: process.env.PASSWORD,
         },
-        // auth:{
-        //   user:"piyushmanglani45@gmail.com",
-        //   pass:"euxh heol lcal mlps"
-        // }
       });
 
       const mailOptions = {
