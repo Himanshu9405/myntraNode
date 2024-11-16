@@ -24,6 +24,7 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
     res.send("<h1>welcome</h1>");
 });
+// hello
 
 app.use('/api/v1/auth',authRoutes)
 
