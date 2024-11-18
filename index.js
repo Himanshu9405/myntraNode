@@ -5,6 +5,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import authRoutes from "./routes/authRoutes.js"
 import categoryRoutes from "./routes/categoryRoutes.js"
+import fileUpload from 'express-fileupload';
 
 // rest object
 const app = express();
@@ -20,6 +21,9 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(fileUpload({
+    useTempFiles: true,
+}))
 
 // routes
 app.get("/", (req, res) => {
