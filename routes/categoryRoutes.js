@@ -16,6 +16,6 @@ router.get('/get_category',getCategoryController)
 router.delete('/delete_category/:id',deleteCategoryController)
 
 // EDIT CATEGORY || METHOD PUT
-router.put('/edit_category/:id',editCategoryController)
+router.patch('/edit_category/:id',editCategoryController)
 
 export default router
