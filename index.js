@@ -5,6 +5,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import authRoutes from "./routes/authRoutes.js"
 import categoryRoutes from "./routes/categoryRoutes.js"
+import subCategoryRoutes from "./routes/subCategoryRoutes.js"
 import fileUpload from 'express-fileupload';
 
 // rest object
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/v1/auth',authRoutes)
 app.use('/api/v1/category',categoryRoutes)
+app.use('/api/v1/sub_category',subCategoryRoutes)
 
 app.listen(PORT, ()=> {
     console.log(`Server stared on ${PORT}`)
