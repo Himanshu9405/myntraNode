@@ -15,6 +15,13 @@ export const catchError = (res, message, error) => {
   });
 };
 
+export const errorHandler = (res,statusCode,errorMessage)=>{
+  return res.status(statusCode).send({
+    success: false,
+    message: errorMessage,
+  });
+}
+
 export const createRandomBytes = () =>
   new Promise((resolve, reject) => {
     crypto.randomBytes(30, (err, buff) => {
